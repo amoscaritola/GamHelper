@@ -119,28 +119,8 @@ UpdateDeviceInfo() {
 		exit 0
 	fi
 	
-	echo ""
-	echo "Enter CSV file location"
-	read csvFile
-
-	userVerify=""
-
-	while [[ $userVerify != "y" ]]; do
-		
-		echo "CSV file is $csvFile"
-		echo "Is this correct? (y/n) press any other key to cancel"
-			read userVerify
-			
-		if [ $userVerify ==  "y" ]; then
-			clear
-		elif [ $userVerify ==  "n" ]; then
-			echo "Enter CSV file location"
-			read csvFile
-		else
-			exit 0
-		fi
-		
-	done
+	#Run function to enter/check CSV
+	VerifyCsv
 		
 	if [[ "$infoToUpdate" == "1" ]]; then
 		echo "Please make sure csv format is: | serial | user |"
@@ -176,7 +156,13 @@ UpdateDeviceInfo() {
 
 DeprovisionDevice() {
 	echo "[4] - Deprovision chromebooks"
-
+	
+	# Input CSV file location and verify
+	VerifyCsv
+	#Deprovision the chromebooks listed in the CSV file
+	gam csv $csvFile gam update cros query:id:~~serial~~ action deprovision_same_model_replace acknowledge_device_touch_requirement
+	
+	ContinueOrExit
 
 }
 
@@ -213,7 +199,7 @@ while [[ $userChoice != "4" ]]; do
 		UpdateDeviceInfo
 		clear
 	elif [ $userChoice == "4" ]; then
-		#deprovsion YEAHHH
+		DeprovisionDevice
 		clear
 	elif [ $userChoice == "E" ]; then
 		echo "Exiting Script"
