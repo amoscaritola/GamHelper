@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 clear
 echo "#############################################"
@@ -9,7 +9,7 @@ echo "#############################################"
 echo ""
 
 #Prompt user to enter CSV file location and verify before continuing
-VerifyCsv(){
+VerifyCsv() {
 	echo ""
 		echo "Enter CSV file location"
 		read csvFile
@@ -173,14 +173,14 @@ fi
 
 ############## Menu Loop ##############
 
-while [[ $userChoice != "4" ]]; do
+while [[ $userChoice != "5" ]]; do
 
 	echo "Please choose an option by entering the number"
 	echo "[1] - Save list of Organization Units to csv on desktop"
 	echo "[2] - Batch move Chromebooks to an OU"
 	echo "[3] - Batch update info on chromebooks"
 	echo "[4] - Deprovision chromebooks"
-	echo "[E] - Exit"
+	echo "[5] - Exit"
 
 	read userChoice
 
@@ -199,14 +199,14 @@ while [[ $userChoice != "4" ]]; do
 	elif [ $userChoice == "4" ]; then
 		DeprovisionDevice
 		clear
-	elif [ $userChoice == "E" ]; then
+	elif [ $userChoice == "5" ]; then
 		echo "Exiting Script"
 		exit 0
 	else 
 		echo "Invalid Response"
-		clear
 		sleep 2
 		clear
 	fi
 		
 done
+exit 0
