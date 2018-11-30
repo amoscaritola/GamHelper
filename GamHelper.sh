@@ -17,11 +17,10 @@ VerifyCsv(){
 		userVerify=""
 
 		while [[ $userVerify != "y" ]]; do
-			
-			echo "CSV file is $csvFile"
+			deviceCount=$(cat $csvFile | wc -l | sed -e 's/^[ \t]*//')
+			echo "This CSV file contains $deviceCount devices."
 			echo "Is this correct? (y/n) press any other key to cancel"
 				read userVerify
-				
 			if [ $userVerify ==  "y" ]; then
 				clear
 			elif [ $userVerify ==  "n" ]; then
@@ -30,7 +29,6 @@ VerifyCsv(){
 			else
 				exit 0
 			fi
-			
 		done
 }
 
@@ -67,13 +65,13 @@ MoveChromebooks() {
 	echo ""
 	echo "Enter CSV file location"
 	read csvFile
-	
+	deviceCount=$(cat $csvFile | wc -l | sed -e 's/^[ \t]*//')
 	userVerify=""
 
 	while [[ $userVerify != "y" ]]; do
 		clear
 		echo "Ou is $ouDestination"
-		echo "CSV file is $csvFile"
+		echo "CSV file is $csvFile and contains $deviceCount devices."
 		echo ""
 		echo "Is this correct? (y/n)"
 		read userVerify
@@ -203,6 +201,7 @@ while [[ $userChoice != "4" ]]; do
 		clear
 	elif [ $userChoice == "E" ]; then
 		echo "Exiting Script"
+		exit 0
 	else 
 		echo "Invalid Response"
 		clear
