@@ -3,7 +3,7 @@
 clear
 echo "#############################################"
 echo "Gam Helper Version 1.0"
-echo "Anthony Moscaritola"
+echo "https://github.com/amoscaritola"
 echo "For help please view the README"
 echo "#############################################"
 echo ""
